@@ -38,13 +38,14 @@ class _homepageTodoState extends State<homepageTodo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.yellow.shade200,
       appBar: AppBar(
         backgroundColor: Colors.yellow,
         title: Text("To Do"),
       elevation: 0,
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.green,
         onPressed: addNewTask,
         child: Icon(Icons.add),
       ),
@@ -71,16 +72,6 @@ class _homepageTodoState extends State<homepageTodo> {
               onChanged: (value) => checkBoxState(value, index),
               deleteTask: (context) => deleteTask(index),
             ),
-
-
-
-
-          // child: ToDoList(
-          //     taskTitle: db.toDoList[index][0],
-          //     doneTask: db.toDoList[index][1],
-          //     onChanged: (value)=> checkBoxState(value, index),
-          //     deleteTask: (context)=> deleteTask(index),
-          // ),
         );
       }),
     );

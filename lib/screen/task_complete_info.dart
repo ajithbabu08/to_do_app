@@ -13,18 +13,22 @@ class TaskDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(backgroundColor: Colors.yellow,
         title: Text('Task Details'),
       ),
-      body: Column(
-        children: [
-          Text(
-            'Title: $title',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-          Text('Description: $description'),
-          // Add more details or formatting as needed
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Title: $title',
+              style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),
+            ),
+            SizedBox(height: 10),
+            Text('Description: $description'),
+            // Add more details or formatting as needed
+          ],
+        ),
       ),
     );
   }

@@ -44,7 +44,7 @@ class _homepageTodoState extends State<homepageTodo> {
       elevation: 0,
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.yellow,
+        backgroundColor: Colors.blueAccent,
         onPressed: addNewTask,
         child: Icon(Icons.add),
       ),
@@ -60,7 +60,7 @@ class _homepageTodoState extends State<homepageTodo> {
                 MaterialPageRoute(
                   builder: (context) => TaskDetailPage(
                     title: db.toDoList[index][0], // Set the title
-                    description: db.toDoList[index][2], // Replace with the actual description from your data source
+                    description: 'Description of the task', // Replace with the actual description from your data source
                   ),
                 ),
               );
@@ -68,9 +68,6 @@ class _homepageTodoState extends State<homepageTodo> {
             child: ToDoList(
               taskTitle: db.toDoList[index][0],
               doneTask: db.toDoList[index][1],
-              ///
-              taskdescription: db.toDoList[index][2],
-
               onChanged: (value) => checkBoxState(value, index),
               deleteTask: (context) => deleteTask(index),
             ),
@@ -113,7 +110,7 @@ class _homepageTodoState extends State<homepageTodo> {
 
   void saveNewTask(){
     setState(() {
-      db.toDoList.add([titlecontroller.text, false,taskcontroller.text]);
+      db.toDoList.add([titlecontroller.text, false]);
       // titlecontroller.clear();
     });
     Navigator.of(context).pop();

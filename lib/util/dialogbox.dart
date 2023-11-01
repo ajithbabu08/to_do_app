@@ -19,11 +19,11 @@ class DialogBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(backgroundColor: Colors.yellow,
+    return AlertDialog(backgroundColor: Colors.white,
       content: Container(
-        height: 200,
+        height: 400,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             TextField(
              decoration: InputDecoration(border: OutlineInputBorder(),
@@ -31,17 +31,23 @@ class DialogBox extends StatelessWidget {
               controller: titlecontroller,
             ),
 
+            SizedBox(height: 13,),
+
             TextField(
               decoration: InputDecoration(border: OutlineInputBorder(),
                   hintText: "Task detail"),
-              controller: taskcontroller,),
+              controller: taskcontroller,
+              maxLines: 13,
+            ),
+
+            SizedBox(height: 13,),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 functionButton(text: "Save",onPressed: onSave),
 
-                const SizedBox(width: 10,),
+                const SizedBox(width: 5,),
 
                 functionButton(text: "Cancel", onPressed: onCancel)
               ],

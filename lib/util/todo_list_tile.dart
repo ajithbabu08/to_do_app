@@ -5,9 +5,6 @@ class ToDoList extends StatelessWidget {
 
   final String taskTitle;
   final bool doneTask;
-  ///
-  final String taskdescription;
-
   Function(bool?)? onChanged;
   Function(BuildContext)? deleteTask;
 
@@ -15,9 +12,6 @@ class ToDoList extends StatelessWidget {
   ToDoList({super.key,
   required this.taskTitle,
     required this.doneTask,
-    ///
-    required this.taskdescription,
-
   required this.onChanged,
   required this.deleteTask,
   });

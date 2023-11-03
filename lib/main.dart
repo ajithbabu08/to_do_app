@@ -1,16 +1,12 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:to_do_app/screen/homepage.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:to_do_app/screen/spalshscreen_mytodo.dart';
 
 import 'data/model.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  // Directory directory = await getApplicationDocumentsDirectory();
-  // Hive.init(directory.path);
   await Hive.initFlutter();
   Hive.registerAdapter(TodoAdapter());
   await Hive.openBox<Todo>("Todo_box");
@@ -25,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: homepageTodo(),
+      home: todoSplash(),
       // title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.yellow,

@@ -3,7 +3,6 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:to_do_app/data/model.dart';
-
 import '../screen/task_complete_info.dart';
 
 class ToDoList extends StatelessWidget {
@@ -61,10 +60,10 @@ class ToDoList extends StatelessWidget {
                       children: [
                         Checkbox(value: todo.isCompleted,
                             onChanged: (value){
-      Todo newTodo = Todo(title: todo.title,description: todo.description,isCompleted: value!);
-      box.putAt(index, newTodo);
+                            Todo newTodo = Todo(title: todo.title,description: todo.description,isCompleted: value!);
+                            box.putAt(index, newTodo);
                             },
-                        activeColor: Colors.black,),
+                            activeColor: Colors.black,),
 
                         Text(
                           todo.title!,style: TextStyle(

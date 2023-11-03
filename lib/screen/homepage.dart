@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:to_do_app/data/model.dart';
-import 'package:to_do_app/screen/search_bar.dart';
 import 'package:to_do_app/screen/taskscompleted.dart';
 
 
@@ -18,20 +17,15 @@ class homepageTodo extends StatefulWidget {
 
 class _homepageTodoState extends State<homepageTodo> {
 
-  // final _myBox=Hive.box('mytodoBox');
-  // ToDoDataBase db=ToDoDataBase();
-  //
-  // late List filteredTasks;
-
   final todo = Hive.box<Todo>('todo_box');
 
   @override
   void initState() {
       todo.isEmpty?
       Center(child:
-      Image.network("https://img.freepik.com/free-vector/team-checklist-concept-illustration_114360-9880.jpg")):
+      Image.network("https://img.freepik.com/free-vector/team-checklist-concept-illustration_114360-9880.jpg",
+        fit: BoxFit.contain,)):
       ToDoList();
-    // filteredTasks = db.toDoList;
     super.initState();
   }
 
@@ -43,20 +37,18 @@ class _homepageTodoState extends State<homepageTodo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.white60,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.yellow.shade200,
         title: Center(child: Text("To Do")),
       actions: [
-
-
         PopupMenuButton(itemBuilder: (context){
           return[
             PopupMenuItem(
                 onTap: (){
                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => FinishedTasks()));
                 },
-                child: Text("Finished Taks")),
+                child: Text("Finished Tasks")),
           ];
         }),SizedBox(width: 10,),
       ],

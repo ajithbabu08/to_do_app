@@ -11,7 +11,7 @@ class FinishedTasks extends StatelessWidget {
     final todoBox = Hive.box<Todo>('todo_box');
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.yellow.shade200,
         title: Text("Finished Tasks"),
       ),
       body: ValueListenableBuilder(
@@ -27,7 +27,7 @@ class FinishedTasks extends StatelessWidget {
           if (completedTask.isEmpty) {
             // Show a message when there are no completed tasks
             return Center(
-              child: Text('No completed tasks.'),
+              child: Text('No Completed Tasks !',style: TextStyle(fontSize: 15),),
             );
           } else {
             // Show the list of completed tasks when there are completed tasks
@@ -38,7 +38,7 @@ class FinishedTasks extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Container(
-                    padding: EdgeInsets.all(24),
+                    padding: EdgeInsets.all(20),
                     decoration: BoxDecoration(
                       color: Colors.grey,
                       borderRadius: BorderRadius.circular(14),

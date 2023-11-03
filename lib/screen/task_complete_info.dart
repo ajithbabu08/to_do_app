@@ -28,7 +28,8 @@ class TaskDetailPage extends StatelessWidget {
                   style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 20),
                 ),
               const  SizedBox(height: 10),
-                Text('Description: $description',style: TextStyle(fontSize: 18),),
+                Text(
+                  'Description: $description',style: TextStyle(fontSize: 18),),
                 // Add more details or formatting as needed
               ],
             ),

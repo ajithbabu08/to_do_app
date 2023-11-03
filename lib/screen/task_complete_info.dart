@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 
 class TaskDetailPage extends StatelessWidget {
@@ -13,21 +13,25 @@ class TaskDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.yellow,
-        title: Text('Task Details'),
+      appBar: AppBar(
+        backgroundColor: Colors.orange.shade100,
+        title: const  Center(
+            child: Text('Task Details')),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Title: $title',
-              style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),
+        padding: const EdgeInsets.all(12.0),
+        child: Container(
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Title: $title',
+                  style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 20),
+                ),
+              const  SizedBox(height: 10),
+                Text('Description: $description'),
+                // Add more details or formatting as needed
+              ],
             ),
-            SizedBox(height: 10),
-            Text('Description: $description'),
-            // Add more details or formatting as needed
-          ],
         ),
       ),
     );

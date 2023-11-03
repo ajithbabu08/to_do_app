@@ -1,12 +1,19 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:to_do_app/screen/homepage.dart';
+import 'package:path_provider/path_provider.dart';
+
+import 'data/model.dart';
 
 void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  // Directory directory = await getApplicationDocumentsDirectory();
+  // Hive.init(directory.path);
   await Hive.initFlutter();
-
-  var box=await Hive.openBox("mytodoBox");
-
+  Hive.registerAdapter(TodoAdapter());
+  await Hive.openBox<Todo>("Todo_box");
   runApp(const MyApp());
 }
 
@@ -21,7 +28,7 @@ class MyApp extends StatelessWidget {
       home: homepageTodo(),
       // title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.cyan,
+        primarySwatch: Colors.yellow,
         // This is the theme of your application.
         //
         // TRY THIS: Try running your application with "flutter run". You'll see

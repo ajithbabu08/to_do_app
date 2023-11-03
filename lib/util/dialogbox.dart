@@ -35,19 +35,17 @@ class DialogBox extends StatelessWidget {
 
             TextField(
               decoration: InputDecoration(border: OutlineInputBorder(),
-                  hintText: "Task detail"),
+                  hintText: "Description"),
               controller: taskcontroller,
-              maxLines: 13,
+              maxLines: 12,
             ),
 
-            SizedBox(height: 13,),
+            SizedBox(height: 12,),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 functionButton(text: "Save",onPressed: onSave),
-
-                const SizedBox(width: 5,),
 
                 functionButton(text: "Cancel", onPressed: onCancel)
               ],

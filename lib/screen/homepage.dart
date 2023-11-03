@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:to_do_app/data/database.dart';
-import 'package:to_do_app/screen/task_complete_info.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:to_do_app/data/model.dart';
+import 'package:to_do_app/screen/search_bar.dart';
+import 'package:to_do_app/screen/taskscompleted.dart';
+
 
 import '../util/dialogbox.dart';
 import '../util/todo_list_tile.dart';
@@ -15,18 +18,20 @@ class homepageTodo extends StatefulWidget {
 
 class _homepageTodoState extends State<homepageTodo> {
 
-  final _myBox=Hive.box('mytodoBox');
-  ToDoDataBase db=ToDoDataBase();
+  // final _myBox=Hive.box('mytodoBox');
+  // ToDoDataBase db=ToDoDataBase();
+  //
+  // late List filteredTasks;
 
-
+  final todo = Hive.box<Todo>('todo_box');
 
   @override
   void initState() {
-    if(_myBox.get("TODOLIST")==null){
-      db.initialData();
-    }else{
-      db.loadData();
-    }
+      todo.isEmpty?
+      Center(child:
+      Image.network("https://img.freepik.com/free-vector/team-checklist-concept-illustration_114360-9880.jpg")):
+      ToDoList();
+    // filteredTasks = db.toDoList;
     super.initState();
   }
 
@@ -38,11 +43,24 @@ class _homepageTodoState extends State<homepageTodo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.yellow.shade200,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.yellow,
-        title: Text("To Do"),
-      elevation: 0,
+        backgroundColor: Colors.white,
+        title: Center(child: Text("To Do")),
+      actions: [
+
+
+        PopupMenuButton(itemBuilder: (context){
+          return[
+            PopupMenuItem(
+                onTap: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => FinishedTasks()));
+                },
+                child: Text("Finished Taks")),
+          ];
+        }),SizedBox(width: 10,),
+      ],
+      elevation: 10,
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,
@@ -50,41 +68,24 @@ class _homepageTodoState extends State<homepageTodo> {
         child: Icon(Icons.add),
       ),
 
-      body: ListView.builder(
-          itemCount: db.toDoList.length,
-          itemBuilder: (context, index){
-        return GestureDetector(
+      body:
 
-          ///remove
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => TaskDetailPage(
-                    title: db.toDoList[index][0], // Set the title
-                    description: 'Description of the task', // Replace with the actual description from your data source
-                  ),
-                ),
-              );
-            },
-            child: ToDoList(
-              taskTitle: db.toDoList[index][0],
-              doneTask: db.toDoList[index][1],
-              onChanged: (value) => checkBoxState(value, index),
-              deleteTask: (context) => deleteTask(index),
-            ),
-        );
-      }),
+      ValueListenableBuilder(
+          valueListenable: todo.listenable(),
+          builder: (context, box, _) {
+    return todo.isEmpty
+    ? Center(
+    child: Image.network(
+    "https://img.freepik.com/free-vector/team-checklist-concept-illustration_114360-9880.jpg"),
+    ) : ToDoList();
+
+    }),
     );
   }
 
-  checkBoxState(bool? value, int index) {
-    setState(() {
-      db.toDoList[index][1] =! db.toDoList[index][1];
-    });
-    db.updateDatabase();
-  }
 
   void addNewTask(){
+    print(todo.values.toList());
     showDialog(
         context: context,
         builder: (context){
@@ -97,23 +98,14 @@ class _homepageTodoState extends State<homepageTodo> {
         });
     titlecontroller.text="";
     taskcontroller.text="";
+
+
   }
 
   void saveNewTask(){
-    setState(() {
-      db.toDoList.add([titlecontroller.text, false]);
-      // titlecontroller.clear();
-    });
+    Todo  newTodo = Todo(title: titlecontroller.text, description: taskcontroller.text, isCompleted: false);
+    todo.add(newTodo);
     Navigator.of(context).pop();
-    db.updateDatabase();
   }
-
-  deleteTask(int index) {
-    setState(() {
-      db.toDoList.removeAt(index);
-    });
-    db.updateDatabase();
-  }
-
 
 }
